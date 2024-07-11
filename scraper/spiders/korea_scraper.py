@@ -1,18 +1,27 @@
 import scrapy
 from bs4 import BeautifulSoup
 
-class MySpider(scrapy.Spider):
+# Author: Jeffrey Chen
+
+class KoreaSpider(scrapy.Spider):
 
     custom_settings = {
         'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'ROBOTSTXT_OBEY': False,  # Disable robots.txt obeying for testing
     }
+    
+    # Name of the spider
+    # This is used when running in terminal, not the file name
     name = 'korea_scraper'
+
+    # URL(s) to start crawling at
     start_urls = [
         'https://koreaherald.com/',
         'https://koreatimes.co.kr',
         'https://yna.co.kr',
     ]
+
+    # To prevent offsite crawling
     allowed_domains = [
         'koreaherald.com',
         'koreatimes.co.kr',
@@ -60,7 +69,7 @@ class MySpider(scrapy.Spider):
             print(data_dict)
             print('---')
 
-            # Yield the data dictionary (optional)
+            # Yield the data dictionary 
             yield {
                 "url": response.url,
                 "data": data_dict
