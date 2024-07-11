@@ -1,18 +1,27 @@
 import scrapy
 from bs4 import BeautifulSoup
 
-class MySpider(scrapy.Spider):
+# Author: Jeffrey Chen
+
+class DubaiSpider(scrapy.Spider):
 
     custom_settings = {
         'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'ROBOTSTXT_OBEY': False,  # Disable robots.txt obeying for testing
     }
+
+    # Name of the spider
+    # This is used when running in terminal, not the file name
     name = 'dubai_scraper'
+
+    # URL(s) to start crawling at
     start_urls = [
         'https://gulfnews.com/',
         'https://khaleejtimes.com',
         'https://thenationalnews.com',
     ]
+
+    # To prevent offsite crawling
     allowed_domains = [
         'gulfnews.com',
         'khaleejtimes.com',
@@ -60,7 +69,7 @@ class MySpider(scrapy.Spider):
             print(data_dict)
             print('---')
 
-            # Yield the data dictionary (optional)
+            # Yield the data dictionary 
             yield {
                 "url": response.url,
                 "data": data_dict
