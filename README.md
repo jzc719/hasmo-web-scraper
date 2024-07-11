@@ -1,4 +1,5 @@
 Author: Jeffrey Chen
+
 Developed for the purposes and usage of Hasmo Consulting. 
 
 Project contains various spiders for web crawling. Spiders are all saved under the "spiders" folder.
