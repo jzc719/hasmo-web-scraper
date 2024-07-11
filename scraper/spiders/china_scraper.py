@@ -1,26 +1,32 @@
 import scrapy
 from bs4 import BeautifulSoup
 
-class MySpider(scrapy.Spider):
+# Author: Jeffrey Chen
+
+class ChinaSpider(scrapy.Spider):
 
     custom_settings = {
         'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'ROBOTSTXT_OBEY': False,  # Disable robots.txt obeying for testing
     }
+
+    # Name of the spider
+    # This is used when running in terminal, not the file name
     name = 'china_scraper'
+
+    # URL(s) to start crawling at
     start_urls = [
         'https://www.chinadaily.com.cn/',
         'https://www.globaltimes.cn',
         'https://www.caixinglobal.com'
     ]
+
+    # To prevent offsite crawling
     allowed_domains = [
         'chinadaily.com.cn',
         'globaltimes.cn',
         'caixinglobal.com'
     ]
-
-    # Keywords to filter links
-    #link_keywords = ['market', 'financ', 'analysis', 'econom']
 
     # Keywords to extract data
     data_keywords = ['market', 'financ', 'analysis', 'econom', 'trend', 'report', 'industry']
@@ -29,11 +35,7 @@ class MySpider(scrapy.Spider):
         # Extract all links on the page
         links = response.css('a::attr(href)').getall()
         
-        # Filter links based on keywords
-        #filtered_links = [link for link in links if any(keyword in link for keyword in self.link_keywords)]
-        
-        # Visit each filtered link once
-        #for link in filtered_links:
+        # Visit each link once
         for link in links:
             yield response.follow(link, self.parse_link)
 
@@ -60,7 +62,7 @@ class MySpider(scrapy.Spider):
             print(data_dict)
             print('---')
 
-            # Yield the data dictionary (optional)
+            # Yield the data dictionary 
             yield {
                 "url": response.url,
                 "data": data_dict
