@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 # Author: Jeffrey Chen
 
-class Phillippines_Market_Trends(scrapy.Spider):
+class Philippines_Market_Trends(scrapy.Spider):
 
     custom_settings = {
         'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
@@ -12,7 +12,7 @@ class Phillippines_Market_Trends(scrapy.Spider):
 
     # Name of the spider
     # This is used when running in terminal, not the file name
-    name = 'phillippines_market_trends'
+    name = 'philippines_market_trends'
 
     # URL(s) to start crawling at
     start_urls = [
